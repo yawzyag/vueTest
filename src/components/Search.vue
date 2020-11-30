@@ -1,32 +1,55 @@
 <template>
-  <form class="d-flex my-3" @submit.prevent="onSearch">
+  <form class="d-flex my-3" @submit.prevent="">
     <input
       class="form-control mr-2"
       type="search"
-      v-model="searchValue"
       name="searchValue"
       placeholder="Buscar"
       aria-label="Search"
+      :value="displayValue"
+      @input="
+        debounce(() => {
+          onSearch($event.target.value);
+        }, 500)
+      "
     />
     <button class="btn btn-dark" type="submit">Buscar</button>
   </form>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Search",
   data() {
     return {
-      searchValue: "",
+      displayValue: "",
+    };
+  },
+  setup() {
+    const createDebounce = () => {
+      let timeout = null;
+      return (fnc, delayMs) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          fnc();
+        }, delayMs || 500);
+      };
+    };
+
+    return {
+      debounce: createDebounce(),
     };
   },
   methods: {
-    onSearch() {
-      // ahora tenemos acceso al evento nativo.
-      // v-on:submit.prevent
-      if (!this?.searchValue) return;
-      this.$emit("search-code", this.searchValue);
+    ...mapActions(["searchInTable", "fetchDataTable"]),
+    onSearch(text) {
+      this.displayValue = text;
+      this.searchInTable(text);
     },
+  },
+  beforeUnmount() {
+    this.searchInTable("");
   },
 };
 </script>
