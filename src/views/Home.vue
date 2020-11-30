@@ -25,7 +25,7 @@ export default {
 }
 .bg {
   /* The image used */
-  background-image: url("../assets/postalcode.jpg");
+  background-image: url("../assets/postalcode.webp");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
