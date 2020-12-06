@@ -10,7 +10,7 @@
       @input="
         debounce(() => {
           onSearch($event.target.value);
-        }, 500)
+        }, 1000)
       "
     />
     <button class="btn btn-dark" type="submit">Buscar</button>

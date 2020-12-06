@@ -2,7 +2,7 @@
   <tbody>
     <TableItem
       v-for="(item, index) in tableData"
-      :key="`${item.Ciudad}-${index}`"
+      :key="`${item.city}-${index}`"
       :item="item"
     />
   </tbody>

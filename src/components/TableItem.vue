@@ -1,8 +1,8 @@
 <template>
   <tr>
-    <th scope="row">{{ item["Codigo Postal"] }}</th>
-    <td>{{ item.Estado }}</td>
-    <td>{{ item.Ciudad }}</td>
+    <th scope="row">{{ item.code }}</th>
+    <td>{{ item.state }}</td>
+    <td>{{ item.city }}</td>
   </tr>
 </template>
 
