@@ -2,7 +2,7 @@
   <div id="nav">
     <nav class="navbar navbar-expand-md p-2 navbar-dark bg-dark">
       <div class="container-fluid">
-        <router-link to="/" class="navbar-brand" href="#">Ivoy</router-link>
+        <router-link to="/" class="navbar-brand">IGEO</router-link>
         <button
           class="navbar-toggler"
           type="button"
