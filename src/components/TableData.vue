@@ -1,72 +1,123 @@
 <template>
   <Search v-on:search-code="onSearch" />
   <SearchItem v-if="getSearchValue" />
-  <div class="table-responsive">
-    <table class="table caption-top table-striped">
-      <caption>
-        {{
-          msg
-        }}
-      </caption>
-      <thead>
-        <tr>
-          <th scope="col"># Codigo postal</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Ciudad</th>
-        </tr>
-      </thead>
-      <TableBody v-bind:tableData="getDataTable" />
-    </table>
-  </div>
-  {{ getTotal }}
-  <nav aria-label="Page navigation">
-    <ul class="pagination flex-wrap justify-content-end">
-      <li class="page-item p-0 disabled">
-        <a class="page-link" href="#" aria-disabled="true" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li v-for="i in getTotal" :key="i" class="page-item p-0">
-        <a class="page-link">{{ i }}</a>
-      </li>
-      <li class="page-item p-0">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <template v-if="!getLoadingTableState">
+    <div class="table-responsive">
+      <table class="table caption-top table-striped">
+        <thead>
+          <tr>
+            <th scope="col"># Codigo postal</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Ciudad</th>
+          </tr>
+        </thead>
+        <TableBody v-bind:tableData="getDataTable" />
+      </table>
+    </div>
+    <nav aria-label="Page navigation">
+      <ul class="pagination flex-wrap justify-content-end">
+        <li
+          class="page-item p-0"
+          v-on:click="pageRestartChangeHandler"
+          :class="currentPage <= 0 ? 'disabled' : ''"
+        >
+          <a
+            class="page-link"
+            :aria-disabled="currentPage <= 0 ? true : false"
+            aria-label="Previous"
+          >
+            <span
+              aria-hidden="true"
+              :class="currentPage <= 0 ? '' : 'text-danger'"
+            >
+              &laquo;
+            </span>
+          </a>
+        </li>
+        <li
+          class="page-item p-0"
+          v-on:click="pageDecreChangeHandler"
+          :class="currentPage <= 0 ? 'disabled' : ''"
+        >
+          <a
+            class="page-link"
+            :aria-disabled="currentPage <= 0 ? true : false"
+            aria-label="Previous"
+          >
+            <span aria-hidden="true"> &lt; </span>
+          </a>
+        </li>
+
+        <li
+          class="page-item p-0"
+          v-on:click="pageAumentChangeHandler"
+          :class="getTotal < currentPage ? 'disabled' : ''"
+        >
+          <a class="page-link" aria-label="Next">
+            <span
+              :aria-disabled="getTotal < currentPage ? false : true"
+              aria-hidden="true"
+              >&gt;</span
+            >
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </template>
+  <Loader v-else />
 </template>
 
 <script>
 // @ is an alias to /src
 import TableBody from "@/components/TableBody.vue";
 import Search from "@/components/Search.vue";
+import Loader from "@/components/Loader.vue";
 import SearchItem from "@/components/SearchItem";
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "Table",
+  name: "TablePageView",
   data() {
     return {
-      currentPage: 1,
+      currentPage: 0,
     };
   },
   components: {
     TableBody,
     Search,
     SearchItem,
+    Loader,
   },
-  props: {
-    msg: String,
-  },
-  computed: mapGetters(["getDataTable", "getSearchValue", "getTotal"]),
+  computed: mapGetters([
+    "getDataTable",
+    "getSearchValue",
+    "getTotal",
+    "getLoadingTableState",
+  ]),
   methods: {
-    ...mapActions(["fetchDataTable"]),
+    ...mapActions(["fetchDataTable", "changeSkip"]),
     onSearch(value) {
       // ahora tenemos acceso al evento nativo.
       // v-on:submit.prevent
 
       console.log("emit search", value);
+    },
+    pageAumentChangeHandler() {
+      if (this.currentPage < this.getTotal) {
+        this.currentPage++;
+        this.changeSkip(this.currentPage);
+      }
+    },
+    pageDecreChangeHandler() {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+        this.changeSkip(this.currentPage);
+      }
+    },
+    pageRestartChangeHandler() {
+      if (this.currentPage > 0) {
+        this.currentPage = 0;
+        this.changeSkip(0);
+      }
     },
   },
   created() {
@@ -76,4 +127,14 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.pagination .page-item {
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+</style>
