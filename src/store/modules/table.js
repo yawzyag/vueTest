@@ -80,7 +80,6 @@ const actions = {
   },
   changeSkip({ dispatch, state }, skip) {
     state.skip = skip * state.limit;
-    console.log(skip * state.limit);
     dispatch("fetchDataTable");
   },
 };
