@@ -17,8 +17,8 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto">
             <router-link class="nav-link" to="/">Home</router-link>
-            <router-link class="nav-link" to="/tabla">Tabla</router-link>
-            <router-link class="nav-link" to="/codigo"
+            <router-link class="nav-link" to="/zipcodes">Zipcodes</router-link>
+            <router-link class="nav-link" to="/nuevo-codigo"
               >Nuevo Codigo</router-link
             >
           </div>

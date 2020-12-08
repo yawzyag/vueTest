@@ -26,10 +26,7 @@
             :aria-disabled="currentPage <= 0 ? true : false"
             aria-label="Previous"
           >
-            <span
-              aria-hidden="true"
-              :class="currentPage <= 0 ? '' : 'text-danger'"
-            >
+            <span aria-hidden="true" :class="currentPage <= 0 ? '' : 'text-danger'">
               &laquo;
             </span>
           </a>

@@ -73,7 +73,6 @@ const mutations = {
   setDataTable: (state, data) => (state.dataTable = data),
   setSearchItem: (state, data) => {
     const { search, zipcode } = data;
-    console.log("🚀 ~ file: table.js ~ line 55 ~ search", search);
     state.searchValue = search;
     state.searchItem = zipcode;
   },

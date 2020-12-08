@@ -11,7 +11,7 @@
 import ZipcodeForm from "@/components/ZipcodeForm.vue";
 
 export default {
-  name: "Form",
+  name: "FormCode",
   components: {
     ZipcodeForm,
   },

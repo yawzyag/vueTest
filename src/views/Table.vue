@@ -9,7 +9,7 @@
 import TablePageView from "@/components/TableData.vue";
 
 export default {
-  name: "tableView",
+  name: "TableView",
   components: {
     TablePageView,
   },
