@@ -18,6 +18,9 @@
           <div class="navbar-nav ml-auto">
             <router-link class="nav-link" to="/">Home</router-link>
             <router-link class="nav-link" to="/tabla">Tabla</router-link>
+            <router-link class="nav-link" to="/codigo"
+              >Nuevo Codigo</router-link
+            >
           </div>
         </div>
       </div>

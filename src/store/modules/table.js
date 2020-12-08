@@ -1,20 +1,5 @@
-import gql from "graphql-tag";
 import { apolloClient } from "../../grapqhl";
-
-const isCoveredByExpress = gql`
-  query getZipcodes($limit: Int, $skip: Int, $search: String) {
-    getZipcodes(limit: $limit, skip: $skip, search: $search) {
-      total
-      zipcodes {
-        id
-        code
-        city
-        state
-        nice_bounds
-      }
-    }
-  }
-`;
+import { isCoveredByExpress } from "../../grapqhl/querys/getZipcodesData";
 
 const state = {
   dataTable: [],

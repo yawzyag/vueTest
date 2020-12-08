@@ -2,7 +2,7 @@
   <Search v-on:search-code="onSearch" />
   <SearchItem v-if="getSearchValue" />
   <template v-if="!getLoadingTableState">
-    <div class="table-responsive">
+    <div v-on:click="openToast" class="table-responsive">
       <table class="table caption-top table-striped">
         <thead>
           <tr>
@@ -118,6 +118,9 @@ export default {
         this.currentPage = 0;
         this.changeSkip(0);
       }
+    },
+    openToast() {
+      this.$toast.show(`Hey! I'm here`);
     },
   },
   created() {

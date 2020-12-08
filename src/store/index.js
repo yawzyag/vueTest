@@ -1,14 +1,13 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 import table from "./modules/table";
+import form from "./modules/form";
 
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: {},
+  mutations: {},
+  actions: {},
   modules: {
-    table
-  }
-})
+    table,
+    form,
+  },
+});

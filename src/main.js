@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import { apolloClient } from "./grapqhl";
 import { DefaultApolloClient } from "@vue/apollo-composable";
+import Toaster from "@meforma/vue-toaster";
 
 createApp({
   setup() {
@@ -15,4 +16,5 @@ createApp({
 })
   .use(store)
   .use(router)
+  .use(Toaster)
   .mount("#app");
