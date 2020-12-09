@@ -15,7 +15,7 @@ export default {
   border-radius: 4px;
   position: relative;
   overflow: hidden;
-  height: 45vh;
+  height: 70vh;
 }
 .placeholder-item::before {
   content: "";
@@ -25,12 +25,7 @@ export default {
   top: 0;
   height: 100%;
   width: 150px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    #e8e8e8 50%,
-    transparent 100%
-  );
+  background: linear-gradient(to right, transparent 0%, #e8e8e8 50%, transparent 100%);
   animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 @keyframes load {

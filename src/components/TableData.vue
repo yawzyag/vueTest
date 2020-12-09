@@ -1,6 +1,6 @@
 <template>
   <Search v-on:search-code="onSearch" />
-  <SearchItem v-if="getSearchValue" />
+  <!-- <SearchItem v-if="getSearchValue" /> -->
   <template v-if="!getLoadingTableState">
     <div v-on:click="openToast" class="table-responsive">
       <table class="table caption-top table-striped">
@@ -14,7 +14,7 @@
         <TableBody v-bind:tableData="getDataTable" />
       </table>
     </div>
-    <nav aria-label="Page navigation">
+    <nav v-if="getTotal > 1" aria-label="Page navigation">
       <ul class="pagination flex-wrap justify-content-end">
         <li
           class="page-item p-0"
@@ -69,7 +69,6 @@
 import TableBody from "@/components/TableBody.vue";
 import Search from "@/components/Search.vue";
 import Loader from "@/components/Loader.vue";
-import SearchItem from "@/components/SearchItem";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "TablePageView",
@@ -81,7 +80,6 @@ export default {
   components: {
     TableBody,
     Search,
-    SearchItem,
     Loader,
   },
   computed: mapGetters([
@@ -117,7 +115,7 @@ export default {
       }
     },
     openToast() {
-      this.$toast.show(`Hey! I'm here`);
+      //this.$toast.show(`Hey! I'm here`);
     },
   },
   created() {

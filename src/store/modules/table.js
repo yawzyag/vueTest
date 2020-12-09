@@ -8,7 +8,7 @@ const state = {
   loading: false,
   loadingTable: false,
   error: false,
-  limit: 5,
+  limit: 10,
   skip: 0,
   total: 0,
 };
@@ -31,6 +31,7 @@ const actions = {
       const { data } = await apolloClient.query({
         query: isCoveredByExpress,
         variables: {
+          search: state.searchValue,
           limit: state.limit,
           skip: state.skip,
         },
@@ -45,7 +46,7 @@ const actions = {
     }
     commit("setDataTable", zipcodes);
   },
-  async searchInTable({ commit, state }, search) {
+  async searchInTable({ commit, state, dispatch }, search) {
     state.searchItem = null;
     let zipcodes = [];
     state.loading = true;
@@ -62,6 +63,7 @@ const actions = {
       state.loading = false;
     }
     commit("setSearchItem", { zipcode: zipcodes[0] || [], search });
+    dispatch("fetchDataTable");
   },
   changeSkip({ dispatch, state }, skip) {
     state.skip = skip * state.limit;

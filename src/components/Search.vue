@@ -4,7 +4,7 @@
       class="form-control mr-2"
       type="search"
       name="searchValue"
-      placeholder="Buscar"
+      placeholder="Buscar zip code"
       aria-label="Search"
       :value="displayValue"
       @input="
