@@ -1,0 +1,45 @@
+/** * Adds a polygon to the map * * @param {H.Map} map A HERE Map instance
+within the application */ function addPolygonToMap(map) { var
+latLonString="(-103.385449026572, 20.6305642009547)(-103.38342382068,
+20.629984560458)(-103.383079594066, 20.6311673309756)(-103.382982833495,
+20.6314925779405)(-103.382930016609, 20.6314388230842)(-103.381731482692,
+20.6311259820555)(-103.382718225054, 20.6297779220359)(-103.384121614176,
+20.6278152445698)(-103.385629261935, 20.6260232279451)(-103.385936265191,
+20.6256583113055)(-103.387038144318, 20.6243352505814)(-103.387254681964,
+20.6240663339774)(-103.387936495324, 20.6232381411922)(-103.388567360945,
+20.6224699306388)(-103.388981583578, 20.6219647536564)(-103.389914476564,
+20.620849492972)(-103.391068408232, 20.6215127994758)(-103.391792044703,
+20.6219287808687)(-103.392755947612, 20.6225128639576)(-103.394778710258,
+20.6237451371198)(-103.397215961617, 20.6251953280007)(-103.399060229963,
+20.6261940493076)(-103.398467693015, 20.6284630611507)(-103.398096869373,
+20.6299322192914)(-103.397942629102, 20.6304539212294)(-103.397811008471,
+20.6308839088541)(-103.397644066526, 20.6314274703616)(-103.397365140677,
+20.6325431859547)(-103.395998020979, 20.6317448879484)(-103.395215718833,
+20.6312284842204)(-103.394863156862, 20.6325634124519)(-103.394690477824,
+20.633076983237)(-103.391059089646, 20.6320737833967)(-103.390187856519,
+20.6318334975643)(-103.389415981754, 20.6316049223765)(-103.388761063898,
+20.6314150380281)(-103.387674510086, 20.6311372052092)(-103.386574179969,
+20.630884589579)(-103.385449026572, 20.6305642009547)"; //to remove first '('
+and last ')' latLonString=latLonString.substring(1,latLonString.length -2); //
+get individual coordinates var latLonValues=latLonString.split("\)\("); var
+finalArray=[]; for(i=0;i<latLonValues.length;i++){ var
+latLonSperated=latLonValues[i].split(",");
+finalArray.push(parseFloat(latLonSperated[1]));
+finalArray.push(parseFloat(latLonSperated[0])); // no altitude
+finalArray.push(0); } var polystrip1 = new H.geo.LineString(finalArray); var
+polygon1 = new H.map.Polygon(polystrip1); map.addObject(polygon1); } /** *
+Boilerplate map initialization code starts below: */ //Step 1: initialize
+communication with the platform // In your own code, replace variable
+window.apikey with your own apikey var platform = new H.service.Platform({
+apikey: window.apikey }); var defaultLayers = platform.createDefaultLayers();
+//Step 2: initialize a map - this map is centered over Europe var map = new
+H.Map(document.getElementById('map'), defaultLayers.vector.normal.map,{ center:
+{lat:20.654439071, lng:-103.289445869}, zoom: 15, pixelRatio:
+window.devicePixelRatio || 1 }); // add a resize listener to make sure that the
+map occupies the whole container window.addEventListener('resize', () =>
+map.getViewPort().resize()); //Step 3: make the map interactive // MapEvents
+enables the event system // Behavior implements default interactions for
+pan/zoom (also on mobile touch environments) var behavior = new
+H.mapevents.Behavior(new H.mapevents.MapEvents(map)); // Create the default UI
+components var ui = H.ui.UI.createDefault(map, defaultLayers); // Now use the
+map as required... addPolygonToMap(map);

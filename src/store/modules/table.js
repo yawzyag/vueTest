@@ -1,9 +1,9 @@
-import { apolloClient } from "../../grapqhl";
-import { isCoveredByExpress } from "../../grapqhl/querys/getZipcodesData";
+import { apolloClient } from '../../grapqhl';
+import { isCoveredByExpress } from '../../grapqhl/querys/getZipcodesData';
 
 const state = {
   dataTable: [],
-  searchValue: "",
+  searchValue: '',
   searchItem: null,
   loading: false,
   loadingTable: false,
@@ -44,7 +44,7 @@ const actions = {
     } finally {
       state.loadingTable = false;
     }
-    commit("setDataTable", zipcodes);
+    commit('setDataTable', zipcodes);
   },
   async searchInTable({ commit, state, dispatch }, search) {
     state.searchItem = null;
@@ -62,12 +62,12 @@ const actions = {
     } finally {
       state.loading = false;
     }
-    commit("setSearchItem", { zipcode: zipcodes[0] || [], search });
-    dispatch("fetchDataTable");
+    commit('setSearchItem', { zipcode: zipcodes[0] || [], search });
+    dispatch('fetchDataTable');
   },
   changeSkip({ dispatch, state }, skip) {
     state.skip = skip * state.limit;
-    dispatch("fetchDataTable");
+    dispatch('fetchDataTable');
   },
 };
 
@@ -75,6 +75,7 @@ const mutations = {
   setDataTable: (state, data) => (state.dataTable = data),
   setSearchItem: (state, data) => {
     const { search, zipcode } = data;
+    state.skip = 0;
     state.searchValue = search;
     state.searchItem = zipcode;
   },
