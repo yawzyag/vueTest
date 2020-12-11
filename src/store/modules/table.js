@@ -48,6 +48,7 @@ const actions = {
   },
   async searchInTable({ commit, state, dispatch }, search) {
     state.searchItem = null;
+    state.skip = 0;
     let zipcodes = [];
     state.loading = true;
     try {
@@ -75,7 +76,6 @@ const mutations = {
   setDataTable: (state, data) => (state.dataTable = data),
   setSearchItem: (state, data) => {
     const { search, zipcode } = data;
-    state.skip = 0;
     state.searchValue = search;
     state.searchItem = zipcode;
   },
